@@ -1,5 +1,7 @@
 # text-to-speech
 
+![Sound image](sound.png?raw=true "Sound image")
+
 Text-to-speech in the browser using the [Speech Synthesis API](https://developer.mozilla.org/en-US/docs/Web/API/Web_Speech_API).
 
 See it running at [http://andrewmacheret.com/projects/text-to-speech](http://andrewmacheret.com/projects/text-to-speech).
