@@ -1,10 +1,12 @@
 # text-to-speech
 
+[![Build Status](https://travis-ci.org/andrewmacheret/text-to-speech.svg?branch=master)](https://travis-ci.org/andrewmacheret/text-to-speech) [![License](https://img.shields.io/badge/license-MIT-lightgray.svg)](https://github.com/andrewmacheret/text-to-speech/blob/master/LICENSE.md)
+
 ![Sound image](sound.png?raw=true "Sound image")
 
 Text-to-speech in the browser using the [Speech Synthesis API](https://developer.mozilla.org/en-US/docs/Web/API/Web_Speech_API).
 
-See it running at [http://andrewmacheret.com/projects/text-to-speech](http://andrewmacheret.com/projects/text-to-speech).
+See it running at [https://andrewmacheret.com/projects/text-to-speech](https://andrewmacheret.com/projects/text-to-speech).
 
 Prereqs:
 * A web server (like [Apache](https://httpd.apache.org/)).
