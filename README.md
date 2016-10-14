@@ -2,7 +2,7 @@
 
 [![Build Status](https://travis-ci.org/andrewmacheret/text-to-speech.svg?branch=master)](https://travis-ci.org/andrewmacheret/text-to-speech) [![License](https://img.shields.io/badge/license-MIT-lightgray.svg)](https://github.com/andrewmacheret/text-to-speech/blob/master/LICENSE.md)
 
-![Sound image](sound.png?raw=true "Sound image")
+![Sound image](www/sound.png?raw=true "Sound image")
 
 Text-to-speech in the browser using the [Speech Synthesis API](https://developer.mozilla.org/en-US/docs/Web/API/Web_Speech_API).
 
