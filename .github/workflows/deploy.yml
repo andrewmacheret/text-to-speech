@@ -1,0 +1,28 @@
+name: Deploy to S3
+
+on:
+  push:
+    branches: [master]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  id-token: write
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: aws-actions/configure-aws-credentials@v6
+        with:
+          role-to-assume: ${{ vars.AWS_ROLE_ARN }}
+          aws-region: us-east-1
+      # Without a cache-control header, browsers can keep old files for months
+      # Everything under projects/text-to-speech comes from this repo, so --delete is safe
+      - run: aws s3 sync www s3://andrewmacheret.com/projects/text-to-speech --delete --cache-control max-age=300
+      - name: Invalidate CloudFront cache
+        run: |
+          aws cloudfront create-invalidation \
+            --distribution-id "${{ vars.CLOUDFRONT_DISTRIBUTION_ID }}" \
+            --paths '/projects/text-to-speech/*'
