@@ -1,39 +1,77 @@
 <!DOCTYPE html>
 <html lang="en-US">
 <head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 
 <!-- open graph -->
-<meta property="og:url" content="http://andrewmacheret.com/projects/projects/text-to-speech/" />
-<meta property="og:image" content="http://andrewmacheret.com/projects/projects/text-to-speech/sound.png" />
+<meta property="og:url" content="https://andrewmacheret.com/projects/text-to-speech/" />
+<meta property="og:image" content="https://andrewmacheret.com/projects/text-to-speech/sound.png" />
 <meta property="og:title" content="Text-to-speech using the Speech Synthesis API" />
 <meta property="og:description" content="Text-to-speech using the Speech Synthesis API" />
 <meta property="og:type" content="website" />
 
 <!-- title -->
 <title>Text-to-speech using the Speech Synthesis API</title>
+<script async src="https://andrewmacheret.com/analytics.js"></script>
+<meta name="description" content="Type some text and hear your browser read it aloud in any of its built-in voices, using the Speech Synthesis API." />
+<link rel="canonical" href="https://andrewmacheret.com/projects/text-to-speech/" />
 
-<!-- js libraries -->
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/react/0.14.2/react.js"></script>
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/react/0.14.2/react-dom.js"></script>
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.23/browser.min.js"></script>
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-<script type="text/javascript" src="https://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
-<script type="text/javascript" src="sorttable.js"></script>
-
-<!-- custom js -->
-<script type="text/javascript" src="jquery.custom.js"></script>
-<script type="text/babel" src="index.js"></script>
-
-<!-- css -->
-<link rel="stylesheet" type="text/css" href="https://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css"> 
-<link rel="stylesheet" type="text/css" href="index.css"> 
-
+<link rel="stylesheet" href="index.css">
+<script src="index.js" defer></script>
+</head>
 <body>
-<div id="body-wrapper">
-  
-  <div id="content">
-  </div>
+<div id="content">
+  <h1>Text-to-speech using the Speech Synthesis API</h1>
+  <h2>
+    Your browser reads the text aloud with its own built-in voices. Pick a voice from the table to hear it.
+    See <a href="https://developer.mozilla.org/en-US/docs/Web/API/Web_Speech_API">the MDN page</a> for more about the API.
+  </h2>
 
+  <p id="unsupported" hidden>This browser doesn't support the Speech Synthesis API.</p>
+
+  <form id="form" action="#">
+    <div id="sliders">
+      <label class="slider">
+        <span class="slider-label">Volume</span>
+        <input id="volume" type="range" min="0.1" max="1" step="0.1" value="1">
+        <output for="volume"></output>
+      </label>
+      <label class="slider">
+        <span class="slider-label">Pitch</span>
+        <input id="pitch" type="range" min="0" max="2" step="0.1" value="1">
+        <output for="pitch"></output>
+      </label>
+      <label class="slider">
+        <span class="slider-label">Rate</span>
+        <input id="rate" type="range" min="0.1" max="10" step="0.1" value="0.9">
+        <output for="rate"></output>
+      </label>
+    </div>
+
+    <div id="speak">
+      <textarea id="text" aria-label="Text to speak">The Fast and The Furious: Tokyo Drift</textarea>
+      <div id="speak-row">
+        <button type="submit" id="speak-button"><img id="sound-image" src="sound.png" alt="">Speak</button>
+        <div id="speech-status" class="not-speaking" role="status" aria-label="Not speaking"></div>
+      </div>
+    </div>
+
+    <div id="voices-wrapper">
+      <table id="voices">
+        <thead>
+          <tr>
+            <th><span class="visually-hidden">Choose</span></th>
+            <th data-sort="name"><button type="button">Name</button></th>
+            <th data-sort="lang"><button type="button">Language</button></th>
+            <th data-sort="default"><button type="button">Default?</button></th>
+            <th data-sort="localService"><button type="button">Local Service?</button></th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
+  </form>
 </div>
 </body>
 </html>
