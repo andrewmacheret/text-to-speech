@@ -142,7 +142,7 @@
   }
 
   function setSpeaking(speaking) {
-    status.classList.toggle('speaking', speaking);
+    status.classList.toggle('good', speaking);
     status.textContent = speaking ? 'Speaking' : 'Ready';
     stopButton.disabled = !speaking;
   }
