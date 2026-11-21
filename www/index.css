@@ -1,13 +1,5 @@
 /* Colors, cards, buttons and the footer come from https://andrewmacheret.com/projects.css */
 
-:root {
-  --table-head: light-dark(#f8fafc, #1e293b);
-  --row-alt: light-dark(rgb(15 23 42 / 0.025), rgb(255 255 255 / 0.03));
-  --row-hover: light-dark(rgb(15 23 42 / 0.05), rgb(255 255 255 / 0.07));
-  --row-selected: light-dark(rgb(124 58 237 / 0.1), rgb(139 92 246 / 0.2));
-  --row-selected-border: light-dark(#7c3aed, #a78bfa);
-}
-
 [hidden] {
   display: none !important;
 }
@@ -108,7 +100,7 @@ input::placeholder {
 }
 
 .chip.good::before {
-  background: light-dark(#16a34a, #4ade80);
+  background: var(--good);
   opacity: 1;
   animation: pulse 1.2s ease-in-out infinite;
 }
@@ -164,7 +156,7 @@ input[type='search'] {
   z-index: 1;
   padding: 0;
   border-bottom: 1px solid var(--glass-border);
-  background: var(--table-head);
+  background: var(--surface);
   text-align: left;
 }
 
@@ -204,16 +196,16 @@ input[type='search'] {
 }
 
 #voices tbody tr:nth-child(even) {
-  background: var(--row-alt);
+  background: color-mix(in srgb, var(--text) 3%, transparent);
 }
 
 #voices tbody tr:hover {
-  background: var(--row-hover);
+  background: color-mix(in srgb, var(--text) 7%, transparent);
 }
 
 #voices tbody tr:has(input:checked) {
-  background: var(--row-selected);
-  box-shadow: inset 3px 0 0 var(--row-selected-border);
+  background: color-mix(in srgb, var(--accent) 15%, transparent);
+  box-shadow: inset 3px 0 0 var(--accent);
 }
 
 #voices tbody tr:has(input:checked) .voice-name {
