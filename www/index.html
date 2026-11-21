@@ -20,26 +20,29 @@
 <meta name="description" content="Type some text and hear your browser read it aloud in any of its built-in voices, using the Speech Synthesis API." />
 <link rel="canonical" href="https://andrewmacheret.com/projects/text-to-speech/" />
 
+<link rel="stylesheet" href="https://andrewmacheret.com/projects.css">
 <link rel="stylesheet" href="index.css">
 <script src="index.js" defer></script>
 </head>
 <body>
 <main class="app">
   <header class="header">
-    <h1>Text-to-speech</h1>
-    <p>
-      Your browser reads the text aloud with its own built-in voices, using the
-      <a href="https://developer.mozilla.org/en-US/docs/Web/API/Web_Speech_API">Speech Synthesis API</a>.
-    </p>
+    <div>
+      <h1>Text-to-speech</h1>
+      <p>
+        Your browser reads the text aloud with its own built-in voices, using the
+        <a href="https://developer.mozilla.org/en-US/docs/Web/API/Web_Speech_API">Speech Synthesis API</a>.
+      </p>
+    </div>
   </header>
 
-  <section id="unsupported" class="card notice" hidden>
+  <section id="unsupported" class="stage notice" hidden>
     <h2>No speech here</h2>
     <p>This browser doesn't support the Speech Synthesis API. Try a recent Chrome, Edge, Firefox or Safari.</p>
   </section>
 
   <form id="form" action="#">
-    <section class="card speak-card">
+    <section class="stage speak-card">
       <textarea id="text" aria-label="Text to speak" rows="3">The Fast and The Furious: Tokyo Drift</textarea>
 
       <div class="sliders">
@@ -85,7 +88,7 @@
       </div>
     </section>
 
-    <section class="card voices-card">
+    <section class="stage voices-card">
       <div class="voices-header">
         <h2>Voices <span id="voice-count" class="count"></span></h2>
         <input id="voice-search" type="search" placeholder="Search voices" aria-label="Search voices by name or language" autocomplete="off">

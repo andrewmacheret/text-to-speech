@@ -1,153 +1,22 @@
-/* Same look as the cube, Monty Hall and NHL pages, with a light version for light mode */
+/* Colors, cards, buttons and the footer come from https://andrewmacheret.com/projects.css */
 
 :root {
-  color-scheme: light dark;
-  font-family: system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-  --bg: #0b1120;
-  --bg-gradient: radial-gradient(120% 70% at 50% 0%, #3b4a66 0%, #1e293b 45%, #0b1120 100%);
-  --text: #e2e8f0;
-  --bright: #f1f5f9;
-  --muted: #94a3b8;
-  --glass: rgb(255 255 255 / 0.05);
-  --glass-border: rgb(255 255 255 / 0.1);
-  --control: rgb(255 255 255 / 0.08);
-  --control-border: rgb(255 255 255 / 0.14);
-  --control-hover: rgb(255 255 255 / 0.15);
-  --shadow: 0 20px 50px rgb(0 0 0 / 0.35), inset 0 1px 0 rgb(255 255 255 / 0.06);
-  --control-shadow: 0 8px 24px rgb(0 0 0 / 0.3), inset 0 1px 0 rgb(255 255 255 / 0.1);
-  --table-head: #1e293b;
-  --row-alt: rgb(255 255 255 / 0.03);
-  --row-hover: rgb(255 255 255 / 0.07);
-  --row-selected: rgb(139 92 246 / 0.2);
-  --row-selected-border: #a78bfa;
-  --accent: #8b5cf6;
-  --link: #c4b5fd;
-  --link-hover: #ddd6fe;
-  --focus: #a5b4fc;
-  --live: #86efac;
-  --live-dot: #4ade80;
-  --live-bg: rgb(74 222 128 / 0.15);
-  --live-border: rgb(74 222 128 / 0.45);
-  color: var(--text);
-  background: var(--bg);
-}
-
-@media (prefers-color-scheme: light) {
-  :root {
-    --bg: #e2e8f0;
-    --bg-gradient: radial-gradient(120% 70% at 50% 0%, #ffffff 0%, #eef2f7 45%, #dbe3ee 100%);
-    --text: #334155;
-    --bright: #0f172a;
-    --muted: #64748b;
-    --glass: rgb(255 255 255 / 0.65);
-    --glass-border: rgb(15 23 42 / 0.08);
-    --control: rgb(255 255 255 / 0.8);
-    --control-border: rgb(15 23 42 / 0.12);
-    --control-hover: #fff;
-    --shadow: 0 20px 50px rgb(15 23 42 / 0.1), inset 0 1px 0 rgb(255 255 255 / 0.8);
-    --control-shadow: 0 6px 18px rgb(15 23 42 / 0.08);
-    --table-head: #f8fafc;
-    --row-alt: rgb(15 23 42 / 0.025);
-    --row-hover: rgb(15 23 42 / 0.05);
-    --row-selected: rgb(124 58 237 / 0.1);
-    --row-selected-border: #7c3aed;
-    --accent: #7c3aed;
-    --link: #6d28d9;
-    --link-hover: #7c3aed;
-    --focus: #6366f1;
-    --live: #15803d;
-    --live-dot: #16a34a;
-    --live-bg: rgb(22 163 74 / 0.12);
-    --live-border: rgb(22 163 74 / 0.4);
-  }
-}
-
-html,
-body {
-  margin: 0;
-  min-height: 100%;
-}
-
-body {
-  min-height: 100dvh;
-  background: var(--bg-gradient) no-repeat;
-  background-color: var(--bg);
-}
-
-h1,
-h2,
-p {
-  margin: 0;
-}
-
-a:link,
-a:visited {
-  color: var(--link);
-  text-decoration: none;
-}
-
-a:hover {
-  color: var(--link-hover);
-  text-decoration: underline;
-}
-
-a:focus-visible,
-input:focus-visible,
-textarea:focus-visible,
-th button:focus-visible {
-  outline: 2px solid var(--focus);
-  outline-offset: 2px;
+  --table-head: light-dark(#f8fafc, #1e293b);
+  --row-alt: light-dark(rgb(15 23 42 / 0.025), rgb(255 255 255 / 0.03));
+  --row-hover: light-dark(rgb(15 23 42 / 0.05), rgb(255 255 255 / 0.07));
+  --row-selected: light-dark(rgb(124 58 237 / 0.1), rgb(139 92 246 / 0.2));
+  --row-selected-border: light-dark(#7c3aed, #a78bfa);
 }
 
 [hidden] {
   display: none !important;
 }
 
-.visually-hidden {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  overflow: hidden;
-  clip-path: inset(50%);
-  white-space: nowrap;
-}
-
-.app {
-  box-sizing: border-box;
-  max-width: 760px;
-  margin: 0 auto;
-  padding: max(1.5rem, env(safe-area-inset-top)) 1rem max(1.5rem, env(safe-area-inset-bottom));
-}
-
-.header h1 {
-  color: var(--bright);
-  font-size: 1.25rem;
-  font-weight: 650;
-  letter-spacing: -0.01em;
-}
-
-.header p {
-  margin-top: 0.25rem;
-  color: var(--muted);
-  font-size: 0.875rem;
-  text-wrap: pretty;
-}
-
-/* glass cards */
-
-.card {
-  box-sizing: border-box;
-  margin-top: 1.25rem;
+.stage {
   padding: 1.25rem;
-  border: 1px solid var(--glass-border);
-  border-radius: 24px;
-  background: var(--glass);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  box-shadow: var(--shadow);
 }
 
-.card h2 {
+.stage h2 {
   color: var(--bright);
   font-size: 1rem;
   font-weight: 650;
@@ -185,7 +54,7 @@ input::placeholder {
   color: var(--muted);
 }
 
-/* volume, pitch and rate, like the cube's speed slider */
+/* volume, pitch and rate, stacked in small cards instead of a single pill */
 
 .sliders {
   display: grid;
@@ -195,16 +64,12 @@ input::placeholder {
 }
 
 .slider {
-  display: flex;
   flex-direction: column;
+  align-items: stretch;
   gap: 0.35rem;
   padding: 0.6rem 1rem 0.5rem;
-  border: 1px solid var(--glass-border);
   border-radius: 16px;
-  background: var(--glass);
-  color: var(--muted);
   font-size: 0.8rem;
-  font-weight: 500;
   cursor: pointer;
 }
 
@@ -213,19 +78,11 @@ input::placeholder {
   justify-content: space-between;
 }
 
-.slider output {
-  color: var(--bright);
-  font-variant-numeric: tabular-nums;
-}
-
 .slider input {
   width: 100%;
-  margin: 0;
-  accent-color: var(--accent);
-  cursor: pointer;
 }
 
-/* speak and stop buttons, same as the cube and NHL pages */
+/* speak and stop buttons */
 
 .actions {
   display: flex;
@@ -235,75 +92,10 @@ input::placeholder {
   margin-top: 1.25rem;
 }
 
-.control {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.5rem;
-  padding: 0.75rem 1.25rem;
-  border: 1px solid var(--control-border);
-  border-radius: 999px;
-  background: var(--control);
-  box-shadow: var(--control-shadow);
-  color: var(--bright);
-  font: inherit;
-  font-size: 1rem;
-  font-weight: 600;
-  white-space: nowrap;
-  cursor: pointer;
-  transition: background-color 0.15s, transform 0.15s, opacity 0.15s;
-}
-
-.control:hover:not(:disabled) {
-  background: var(--control-hover);
-  transform: translateY(-1px);
-}
-
-.control:active:not(:disabled) {
-  transform: translateY(0) scale(0.97);
-}
-
-.control:focus-visible {
-  outline: 2px solid var(--focus);
-  outline-offset: 3px;
-}
-
-.control:disabled {
-  opacity: 0.5;
-  cursor: default;
-}
-
-.control.primary {
-  border-color: transparent;
-  background: linear-gradient(135deg, #6366f1, #a855f7);
-  box-shadow: 0 8px 24px rgb(99 102 241 / 0.4), inset 0 1px 0 rgb(255 255 255 / 0.25);
-  color: #fff;
-}
-
-.control.primary:hover:not(:disabled) {
-  background: linear-gradient(135deg, #7376f4, #b46af8);
-}
-
-.control svg {
-  flex-shrink: 0;
-}
-
 /* "Ready" or a pulsing "Speaking" */
 
 .chip {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.45rem;
   margin-left: auto;
-  padding: 0.25rem 0.75rem;
-  border: 1px solid var(--control-border);
-  border-radius: 999px;
-  background: var(--control);
-  color: var(--muted);
-  font-size: 0.8rem;
-  font-weight: 600;
-  line-height: 1.2;
-  white-space: nowrap;
 }
 
 .chip::before {
@@ -315,23 +107,10 @@ input::placeholder {
   opacity: 0.6;
 }
 
-.chip.speaking {
-  border-color: var(--live-border);
-  background: var(--live-bg);
-  color: var(--live);
-}
-
-.chip.speaking::before {
-  background: var(--live-dot);
+.chip.good::before {
+  background: light-dark(#16a34a, #4ade80);
   opacity: 1;
   animation: pulse 1.2s ease-in-out infinite;
-}
-
-@keyframes pulse {
-  50% {
-    opacity: 0.35;
-    transform: scale(0.8);
-  }
 }
 
 /* voice list */
@@ -348,19 +127,6 @@ input::placeholder {
   display: flex;
   align-items: center;
   gap: 0.5rem;
-}
-
-.count {
-  min-width: 1.4em;
-  padding: 1px 8px;
-  border: 1px solid var(--control-border);
-  border-radius: 999px;
-  background: var(--control);
-  color: var(--muted);
-  font-size: 0.75rem;
-  font-weight: 600;
-  text-align: center;
-  font-variant-numeric: tabular-nums;
 }
 
 input[type='search'] {
@@ -473,11 +239,6 @@ input[type='search'] {
   cursor: pointer;
 }
 
-#voices input[type='radio']:focus-visible {
-  outline: 2px solid var(--focus);
-  outline-offset: 2px;
-}
-
 .lang-code {
   display: block;
   color: var(--muted);
@@ -494,19 +255,9 @@ input[type='search'] {
   text-align: center;
 }
 
-.footer {
-  display: flex;
-  justify-content: center;
-  gap: 0.6rem;
-  margin-top: 2.5rem;
-  color: var(--muted);
-  font-size: 0.85rem;
-}
-
 @media (max-width: 640px) {
-  .card {
+  .stage {
     padding: 1rem;
-    border-radius: 20px;
   }
 
   .sliders {
@@ -534,11 +285,7 @@ input[type='search'] {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .control {
-    transition: none;
-  }
-
-  .chip.speaking::before {
+  .chip.good::before {
     animation: none;
   }
 }
