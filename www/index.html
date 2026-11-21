@@ -2,13 +2,16 @@
 <html lang="en-US">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#1e293b" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
 
 <!-- open graph -->
 <meta property="og:url" content="https://andrewmacheret.com/projects/text-to-speech/" />
-<meta property="og:image" content="https://andrewmacheret.com/projects/text-to-speech/sound.png" />
+<meta property="og:image" content="https://andrewmacheret.com/projects/text-to-speech/screenshot.png" />
 <meta property="og:title" content="Text-to-speech using the Speech Synthesis API" />
-<meta property="og:description" content="Text-to-speech using the Speech Synthesis API" />
+<meta property="og:description" content="Type some text and hear your browser read it aloud in any of its built-in voices, using the Speech Synthesis API." />
 <meta property="og:type" content="website" />
 
 <!-- title -->
@@ -21,57 +24,97 @@
 <script src="index.js" defer></script>
 </head>
 <body>
-<div id="content">
-  <h1>Text-to-speech using the Speech Synthesis API</h1>
-  <h2>
-    Your browser reads the text aloud with its own built-in voices. Pick a voice from the table to hear it.
-    See <a href="https://developer.mozilla.org/en-US/docs/Web/API/Web_Speech_API">the MDN page</a> for more about the API.
-  </h2>
+<main class="app">
+  <header class="header">
+    <h1>Text-to-speech</h1>
+    <p>
+      Your browser reads the text aloud with its own built-in voices, using the
+      <a href="https://developer.mozilla.org/en-US/docs/Web/API/Web_Speech_API">Speech Synthesis API</a>.
+    </p>
+  </header>
 
-  <p id="unsupported" hidden>This browser doesn't support the Speech Synthesis API.</p>
+  <section id="unsupported" class="card notice" hidden>
+    <h2>No speech here</h2>
+    <p>This browser doesn't support the Speech Synthesis API. Try a recent Chrome, Edge, Firefox or Safari.</p>
+  </section>
 
   <form id="form" action="#">
-    <div id="sliders">
-      <label class="slider">
-        <span class="slider-label">Volume</span>
-        <input id="volume" type="range" min="0.1" max="1" step="0.1" value="1">
-        <output for="volume"></output>
-      </label>
-      <label class="slider">
-        <span class="slider-label">Pitch</span>
-        <input id="pitch" type="range" min="0" max="2" step="0.1" value="1">
-        <output for="pitch"></output>
-      </label>
-      <label class="slider">
-        <span class="slider-label">Rate</span>
-        <input id="rate" type="range" min="0.1" max="10" step="0.1" value="0.9">
-        <output for="rate"></output>
-      </label>
-    </div>
+    <section class="card speak-card">
+      <textarea id="text" aria-label="Text to speak" rows="3">The Fast and The Furious: Tokyo Drift</textarea>
 
-    <div id="speak">
-      <textarea id="text" aria-label="Text to speak">The Fast and The Furious: Tokyo Drift</textarea>
-      <div id="speak-row">
-        <button type="submit" id="speak-button"><img id="sound-image" src="sound.png" alt="">Speak</button>
-        <div id="speech-status" class="not-speaking" role="status" aria-label="Not speaking"></div>
+      <div class="sliders">
+        <label class="slider" for="volume">
+          <span class="slider-top">
+            <span>Volume</span>
+            <output for="volume"></output>
+          </span>
+          <input id="volume" type="range" min="0.1" max="1" step="0.1" value="1">
+        </label>
+        <label class="slider" for="pitch">
+          <span class="slider-top">
+            <span>Pitch</span>
+            <output for="pitch"></output>
+          </span>
+          <input id="pitch" type="range" min="0" max="2" step="0.1" value="1">
+        </label>
+        <label class="slider" for="rate">
+          <span class="slider-top">
+            <span>Rate</span>
+            <output for="rate"></output>
+          </span>
+          <input id="rate" type="range" min="0.1" max="10" step="0.1" value="0.9">
+        </label>
       </div>
-    </div>
 
-    <div id="voices-wrapper">
-      <table id="voices">
-        <thead>
-          <tr>
-            <th><span class="visually-hidden">Choose</span></th>
-            <th data-sort="name"><button type="button">Name</button></th>
-            <th data-sort="lang"><button type="button">Language</button></th>
-            <th data-sort="default"><button type="button">Default?</button></th>
-            <th data-sort="localService"><button type="button">Local Service?</button></th>
-          </tr>
-        </thead>
-        <tbody></tbody>
-      </table>
-    </div>
+      <div class="actions">
+        <button type="submit" class="control primary">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M11 5 6 9H2v6h4l5 4V5z" fill="currentColor"/>
+            <path d="M15.5 8.5a5 5 0 0 1 0 7"/>
+            <path d="M19 5a10 10 0 0 1 0 14"/>
+          </svg>
+          Speak
+        </button>
+        <button type="button" id="stop" class="control" disabled>
+          <svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true">
+            <rect x="5" y="5" width="14" height="14" rx="2" fill="currentColor"/>
+          </svg>
+          Stop
+        </button>
+        <span id="speech-status" class="chip" role="status">Ready</span>
+      </div>
+    </section>
+
+    <section class="card voices-card">
+      <div class="voices-header">
+        <h2>Voices <span id="voice-count" class="count"></span></h2>
+        <input id="voice-search" type="search" placeholder="Search voices" aria-label="Search voices by name or language" autocomplete="off">
+      </div>
+      <p class="hint">Pick a voice to hear the text in it.</p>
+
+      <div id="voices-wrapper">
+        <table id="voices">
+          <thead>
+            <tr>
+              <th><span class="visually-hidden">Choose</span></th>
+              <th data-sort="name"><button type="button">Name</button></th>
+              <th data-sort="lang"><button type="button">Language</button></th>
+              <th data-sort="default"><button type="button">Default</button></th>
+              <th data-sort="localService"><button type="button">Local</button></th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+        <p id="no-voices" class="empty" hidden>No voices match.</p>
+      </div>
+    </section>
   </form>
-</div>
+
+  <footer class="footer">
+    <a href="https://andrewmacheret.com/">More projects</a>
+    <span aria-hidden="true">&middot;</span>
+    <a href="https://github.com/andrewmacheret/text-to-speech">Source</a>
+  </footer>
+</main>
 </body>
 </html>

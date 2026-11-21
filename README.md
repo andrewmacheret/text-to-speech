@@ -4,9 +4,14 @@
 
 Text-to-speech in the browser using the [Speech Synthesis API](https://developer.mozilla.org/en-US/docs/Web/API/Web_Speech_API). Plain JavaScript, no libraries.
 
+Type some text, set the volume, pitch and rate, and pick from your browser's built-in voices. The voice list can be searched and sorted. It uses the same glassy look as the [cube](https://andrewmacheret.com/projects/cube/), [Monty Hall](https://andrewmacheret.com/projects/montyhall/) and [NHL](https://andrewmacheret.com/projects/nhl/) pages, follows the system's light or dark mode, and works on phones and desktops.
+
 See it running at [https://andrewmacheret.com/projects/text-to-speech/](https://andrewmacheret.com/projects/text-to-speech/).
 
-![Sound image](www/sound.png?raw=true "Sound image")
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="www/screenshot-dark.png">
+  <img alt="Screenshot of the text-to-speech page with a text box, volume, pitch and rate sliders, and a list of voices" src="www/screenshot.png">
+</picture>
 
 ## Run it locally
 
@@ -15,7 +20,9 @@ cd www
 python3 -m http.server
 ```
 
-Then open [http://localhost:8000](http://localhost:8000) and click "Speak". You should hear the text. Picking a voice from the table also reads the text in that voice.
+Then open [http://localhost:8000](http://localhost:8000) and click "Speak" (or press Cmd+Enter or Ctrl+Enter in the text box). You should hear the text. Picking a voice from the table also reads the text in that voice.
+
+`www/screenshot.png` is used for this README and for link previews (`og:image`). `www/screenshot-dark.png` is the README screenshot for GitHub's dark theme.
 
 ## Deploy
 

@@ -1,43 +1,106 @@
-html {
-  font-family: Helvetica, Arial, sans-serif;
-  color: #333;
-  text-rendering: optimizelegibility;
+/* Same look as the cube, Monty Hall and NHL pages, with a light version for light mode */
+
+:root {
+  color-scheme: light dark;
+  font-family: system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  --bg: #0b1120;
+  --bg-gradient: radial-gradient(120% 70% at 50% 0%, #3b4a66 0%, #1e293b 45%, #0b1120 100%);
+  --text: #e2e8f0;
+  --bright: #f1f5f9;
+  --muted: #94a3b8;
+  --glass: rgb(255 255 255 / 0.05);
+  --glass-border: rgb(255 255 255 / 0.1);
+  --control: rgb(255 255 255 / 0.08);
+  --control-border: rgb(255 255 255 / 0.14);
+  --control-hover: rgb(255 255 255 / 0.15);
+  --shadow: 0 20px 50px rgb(0 0 0 / 0.35), inset 0 1px 0 rgb(255 255 255 / 0.06);
+  --control-shadow: 0 8px 24px rgb(0 0 0 / 0.3), inset 0 1px 0 rgb(255 255 255 / 0.1);
+  --table-head: #1e293b;
+  --row-alt: rgb(255 255 255 / 0.03);
+  --row-hover: rgb(255 255 255 / 0.07);
+  --row-selected: rgb(139 92 246 / 0.2);
+  --row-selected-border: #a78bfa;
+  --accent: #8b5cf6;
+  --link: #c4b5fd;
+  --link-hover: #ddd6fe;
+  --focus: #a5b4fc;
+  --live: #86efac;
+  --live-dot: #4ade80;
+  --live-bg: rgb(74 222 128 / 0.15);
+  --live-border: rgb(74 222 128 / 0.45);
+  color: var(--text);
+  background: var(--bg);
 }
 
-input, select, button, textarea {
-  font-family: Helvetica, Arial, sans-serif;
-  font-size: 16px;
+@media (prefers-color-scheme: light) {
+  :root {
+    --bg: #e2e8f0;
+    --bg-gradient: radial-gradient(120% 70% at 50% 0%, #ffffff 0%, #eef2f7 45%, #dbe3ee 100%);
+    --text: #334155;
+    --bright: #0f172a;
+    --muted: #64748b;
+    --glass: rgb(255 255 255 / 0.65);
+    --glass-border: rgb(15 23 42 / 0.08);
+    --control: rgb(255 255 255 / 0.8);
+    --control-border: rgb(15 23 42 / 0.12);
+    --control-hover: #fff;
+    --shadow: 0 20px 50px rgb(15 23 42 / 0.1), inset 0 1px 0 rgb(255 255 255 / 0.8);
+    --control-shadow: 0 6px 18px rgb(15 23 42 / 0.08);
+    --table-head: #f8fafc;
+    --row-alt: rgb(15 23 42 / 0.025);
+    --row-hover: rgb(15 23 42 / 0.05);
+    --row-selected: rgb(124 58 237 / 0.1);
+    --row-selected-border: #7c3aed;
+    --accent: #7c3aed;
+    --link: #6d28d9;
+    --link-hover: #7c3aed;
+    --focus: #6366f1;
+    --live: #15803d;
+    --live-dot: #16a34a;
+    --live-bg: rgb(22 163 74 / 0.12);
+    --live-border: rgb(22 163 74 / 0.4);
+  }
 }
 
-* {
+html,
+body {
   margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+  min-height: 100%;
 }
 
-img {
-  vertical-align: middle;
+body {
+  min-height: 100dvh;
+  background: var(--bg-gradient) no-repeat;
+  background-color: var(--bg);
 }
 
-a:link, a:visited {
+h1,
+h2,
+p {
+  margin: 0;
+}
+
+a:link,
+a:visited {
+  color: var(--link);
   text-decoration: none;
-  color: #213483;
 }
 
 a:hover {
-  color: #4763d1;
+  color: var(--link-hover);
+  text-decoration: underline;
 }
 
-h1 {
-  margin: 10px;
-  font-size: 32px;
-  font-weight: bold;
+a:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+th button:focus-visible {
+  outline: 2px solid var(--focus);
+  outline-offset: 2px;
 }
 
-h2 {
-  margin: 10px;
-  font-size: 14px;
-  font-weight: normal;
+[hidden] {
+  display: none !important;
 }
 
 .visually-hidden {
@@ -49,144 +112,433 @@ h2 {
   white-space: nowrap;
 }
 
-#content {
-  max-width: 750px;
-  margin: 20px auto;
-  padding: 0 10px;
+.app {
+  box-sizing: border-box;
+  max-width: 760px;
+  margin: 0 auto;
+  padding: max(1.5rem, env(safe-area-inset-top)) 1rem max(1.5rem, env(safe-area-inset-bottom));
 }
 
-#form {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 20px 40px;
-  margin-top: 20px;
+.header h1 {
+  color: var(--bright);
+  font-size: 1.25rem;
+  font-weight: 650;
+  letter-spacing: -0.01em;
 }
 
-/* sliders on the left, text and speak button on the right */
-#sliders {
-  flex: 1 1 300px;
-  display: flex;
-  flex-direction: column;
-  gap: 24px;
-  padding-top: 10px;
+.header p {
+  margin-top: 0.25rem;
+  color: var(--muted);
+  font-size: 0.875rem;
+  text-wrap: pretty;
+}
+
+/* glass cards */
+
+.card {
+  box-sizing: border-box;
+  margin-top: 1.25rem;
+  padding: 1.25rem;
+  border: 1px solid var(--glass-border);
+  border-radius: 24px;
+  background: var(--glass);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow: var(--shadow);
+}
+
+.card h2 {
+  color: var(--bright);
+  font-size: 1rem;
+  font-weight: 650;
+}
+
+.notice p {
+  margin-top: 0.5rem;
+  color: var(--muted);
+}
+
+/* the text box */
+
+textarea,
+input[type='search'] {
+  box-sizing: border-box;
+  border: 1px solid var(--control-border);
+  background: var(--control);
+  color: var(--bright);
+  font: inherit;
+}
+
+textarea {
+  display: block;
+  width: 100%;
+  min-height: 6rem;
+  padding: 0.9rem 1rem;
+  border-radius: 16px;
+  font-size: 1.15rem;
+  line-height: 1.45;
+  resize: vertical;
+}
+
+textarea::placeholder,
+input::placeholder {
+  color: var(--muted);
+}
+
+/* volume, pitch and rate, like the cube's speed slider */
+
+.sliders {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.75rem;
+  margin-top: 1rem;
 }
 
 .slider {
   display: flex;
-  align-items: center;
-  gap: 10px;
+  flex-direction: column;
+  gap: 0.35rem;
+  padding: 0.6rem 1rem 0.5rem;
+  border: 1px solid var(--glass-border);
+  border-radius: 16px;
+  background: var(--glass);
+  color: var(--muted);
+  font-size: 0.8rem;
+  font-weight: 500;
   cursor: pointer;
 }
 
-.slider-label {
-  width: 60px;
-}
-
-.slider input {
-  flex: 1;
-  cursor: pointer;
-  accent-color: #213483;
+.slider-top {
+  display: flex;
+  justify-content: space-between;
 }
 
 .slider output {
-  width: 2.5em;
-  padding: 2px 6px;
-  border-radius: 4px;
-  background: #000;
-  color: #fff;
-  font-size: 12px;
-  text-align: center;
+  color: var(--bright);
+  font-variant-numeric: tabular-nums;
 }
 
-#speak {
-  flex: 1 1 300px;
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
-
-#text {
-  height: 120px;
-  padding: 4px;
-}
-
-#speak-row {
-  display: flex;
-  gap: 8px;
-}
-
-#speak-button {
-  flex: 1;
-  padding: 6px;
-  border: 1px solid #999;
-  border-radius: 5px;
-  background: linear-gradient(#fff, #ddd);
+.slider input {
+  width: 100%;
+  margin: 0;
+  accent-color: var(--accent);
   cursor: pointer;
 }
 
-#speak-button:hover {
-  background: linear-gradient(#fff, #ccc);
+/* speak and stop buttons, same as the cube and NHL pages */
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.75rem;
+  margin-top: 1.25rem;
 }
 
-#sound-image {
-  width: 24px;
-  height: 24px;
-  margin-right: 6px;
+.control {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.25rem;
+  border: 1px solid var(--control-border);
+  border-radius: 999px;
+  background: var(--control);
+  box-shadow: var(--control-shadow);
+  color: var(--bright);
+  font: inherit;
+  font-size: 1rem;
+  font-weight: 600;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: background-color 0.15s, transform 0.15s, opacity 0.15s;
 }
 
-#speech-status {
-  width: 50px;
-  border-radius: 5px;
-  border: solid #999 1px;
+.control:hover:not(:disabled) {
+  background: var(--control-hover);
+  transform: translateY(-1px);
 }
 
-#speech-status.not-speaking {
-  background-color: #f99;
+.control:active:not(:disabled) {
+  transform: translateY(0) scale(0.97);
 }
 
-#speech-status.speaking {
-  background-color: #9f9;
+.control:focus-visible {
+  outline: 2px solid var(--focus);
+  outline-offset: 3px;
 }
 
-/* the voice table scrolls sideways on small screens instead of squishing */
+.control:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+
+.control.primary {
+  border-color: transparent;
+  background: linear-gradient(135deg, #6366f1, #a855f7);
+  box-shadow: 0 8px 24px rgb(99 102 241 / 0.4), inset 0 1px 0 rgb(255 255 255 / 0.25);
+  color: #fff;
+}
+
+.control.primary:hover:not(:disabled) {
+  background: linear-gradient(135deg, #7376f4, #b46af8);
+}
+
+.control svg {
+  flex-shrink: 0;
+}
+
+/* "Ready" or a pulsing "Speaking" */
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  margin-left: auto;
+  padding: 0.25rem 0.75rem;
+  border: 1px solid var(--control-border);
+  border-radius: 999px;
+  background: var(--control);
+  color: var(--muted);
+  font-size: 0.8rem;
+  font-weight: 600;
+  line-height: 1.2;
+  white-space: nowrap;
+}
+
+.chip::before {
+  content: '';
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 50%;
+  background: currentColor;
+  opacity: 0.6;
+}
+
+.chip.speaking {
+  border-color: var(--live-border);
+  background: var(--live-bg);
+  color: var(--live);
+}
+
+.chip.speaking::before {
+  background: var(--live-dot);
+  opacity: 1;
+  animation: pulse 1.2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  50% {
+    opacity: 0.35;
+    transform: scale(0.8);
+  }
+}
+
+/* voice list */
+
+.voices-header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+}
+
+.voices-header h2 {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.count {
+  min-width: 1.4em;
+  padding: 1px 8px;
+  border: 1px solid var(--control-border);
+  border-radius: 999px;
+  background: var(--control);
+  color: var(--muted);
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-align: center;
+  font-variant-numeric: tabular-nums;
+}
+
+input[type='search'] {
+  width: min(16rem, 100%);
+  padding: 0.5rem 1rem;
+  border-radius: 999px;
+  font-size: 0.9rem;
+}
+
+.hint {
+  margin-top: 0.35rem;
+  color: var(--muted);
+  font-size: 0.85rem;
+}
+
+/* scrolls on its own so a long list (Safari has 150+ voices) doesn't push the page down */
 #voices-wrapper {
-  flex-basis: 100%;
-  overflow-x: auto;
+  max-height: 26rem;
+  margin-top: 0.9rem;
+  overflow: auto;
+  border: 1px solid var(--glass-border);
+  border-radius: 16px;
+  overscroll-behavior: contain;
 }
 
 #voices {
+  width: 100%;
   border-spacing: 0;
-  width: 100%;
+  font-size: 0.9rem;
 }
 
-#voices td, #voices th {
-  text-align: center;
-}
-
-#voices tbody tr:nth-child(odd) {
-  background-color: #eee;
-}
-
-#voices label {
-  width: 100%;
-  height: 100%;
-  display: inline-block;
-  cursor: pointer;
-  padding: 4px 12px;
+#voices th {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  padding: 0;
+  border-bottom: 1px solid var(--glass-border);
+  background: var(--table-head);
+  text-align: left;
 }
 
 #voices th button {
+  width: 100%;
+  padding: 0.6rem 0.75rem;
   border: 0;
   background: none;
-  font-weight: bold;
-  padding: 4px 12px;
+  color: var(--muted);
+  font: inherit;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-align: left;
+  text-transform: uppercase;
+  white-space: nowrap;
   cursor: pointer;
 }
 
-#voices th[aria-sort="ascending"] button::after {
-  content: " \25BE";
+#voices th button:hover,
+#voices th[aria-sort='ascending'] button,
+#voices th[aria-sort='descending'] button {
+  color: var(--bright);
 }
 
-#voices th[aria-sort="descending"] button::after {
-  content: " \25B4";
+#voices th[aria-sort='ascending'] button::after {
+  content: ' \25B4';
+}
+
+#voices th[aria-sort='descending'] button::after {
+  content: ' \25BE';
+}
+
+#voices td {
+  padding: 0;
+  color: var(--text);
+}
+
+#voices tbody tr:nth-child(even) {
+  background: var(--row-alt);
+}
+
+#voices tbody tr:hover {
+  background: var(--row-hover);
+}
+
+#voices tbody tr:has(input:checked) {
+  background: var(--row-selected);
+  box-shadow: inset 3px 0 0 var(--row-selected-border);
+}
+
+#voices tbody tr:has(input:checked) .voice-name {
+  color: var(--bright);
+  font-weight: 600;
+}
+
+/* the whole cell is clickable, not just the radio button */
+#voices label {
+  display: block;
+  padding: 0.55rem 0.75rem;
+  cursor: pointer;
+}
+
+#voices td:first-child label {
+  padding-right: 0;
+}
+
+#voices input[type='radio'] {
+  margin: 0;
+  vertical-align: middle;
+  accent-color: var(--accent);
+  cursor: pointer;
+}
+
+#voices input[type='radio']:focus-visible {
+  outline: 2px solid var(--focus);
+  outline-offset: 2px;
+}
+
+.lang-code {
+  display: block;
+  color: var(--muted);
+  font-size: 0.75rem;
+}
+
+.no {
+  color: var(--muted);
+}
+
+.empty {
+  padding: 1.5rem;
+  color: var(--muted);
+  text-align: center;
+}
+
+.footer {
+  display: flex;
+  justify-content: center;
+  gap: 0.6rem;
+  margin-top: 2.5rem;
+  color: var(--muted);
+  font-size: 0.85rem;
+}
+
+@media (max-width: 640px) {
+  .card {
+    padding: 1rem;
+    border-radius: 20px;
+  }
+
+  .sliders {
+    grid-template-columns: 1fr;
+    gap: 0.5rem;
+  }
+
+  .control.primary {
+    flex: 1;
+  }
+
+  input[type='search'] {
+    width: 100%;
+  }
+
+  #voices-wrapper {
+    max-height: 22rem;
+  }
+
+  /* hide the default and local columns so names don't wrap onto 3 lines */
+  #voices th:nth-child(n + 4),
+  #voices td:nth-child(n + 4) {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .control {
+    transition: none;
+  }
+
+  .chip.speaking::before {
+    animation: none;
+  }
 }
