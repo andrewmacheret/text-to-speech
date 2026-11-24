@@ -3,6 +3,8 @@ name: Deploy to S3
 on:
   push:
     branches: [master]
+    paths-ignore:
+      - '**.md'
   workflow_dispatch:
 
 permissions:
