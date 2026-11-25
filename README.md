@@ -26,7 +26,7 @@ Then open [http://localhost:8000](http://localhost:8000) and click "Speak" (or p
 
 ## Health check
 
-[`/projects/text-to-speech/healthcheck/`](https://andrewmacheret.com/projects/text-to-speech/healthcheck/) checks the page and its scripts and styles. The Canary workflow (`.github/workflows/canary.yml`) opens it once a day, started by [andrewmacheret/canary](https://github.com/andrewmacheret/canary).
+Once a day, the Canary workflow (`.github/workflows/canary.yml`) checks the page and its scripts and styles. It's started by [andrewmacheret/canary](https://github.com/andrewmacheret/canary).
 
 ## Deploy
 
