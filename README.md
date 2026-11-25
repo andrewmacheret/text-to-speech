@@ -1,6 +1,6 @@
 # text-to-speech
 
-[![Deploy](https://github.com/andrewmacheret/text-to-speech/actions/workflows/deploy.yml/badge.svg)](https://github.com/andrewmacheret/text-to-speech/actions/workflows/deploy.yml) [![License](https://img.shields.io/badge/license-MIT-lightgray.svg)](https://github.com/andrewmacheret/text-to-speech/blob/master/LICENSE.md)
+[![Deploy](https://github.com/andrewmacheret/text-to-speech/actions/workflows/deploy.yml/badge.svg)](https://github.com/andrewmacheret/text-to-speech/actions/workflows/deploy.yml) [![Canary](https://github.com/andrewmacheret/text-to-speech/actions/workflows/canary.yml/badge.svg)](https://github.com/andrewmacheret/text-to-speech/actions/workflows/canary.yml) [![License](https://img.shields.io/badge/license-MIT-lightgray.svg)](https://github.com/andrewmacheret/text-to-speech/blob/master/LICENSE.md)
 
 Text-to-speech in the browser using the [Speech Synthesis API](https://developer.mozilla.org/en-US/docs/Web/API/Web_Speech_API). Plain JavaScript, no libraries.
 
@@ -23,6 +23,10 @@ python3 -m http.server
 Then open [http://localhost:8000](http://localhost:8000) and click "Speak" (or press Cmd+Enter or Ctrl+Enter in the text box). You should hear the text. Picking a voice from the table also reads the text in that voice.
 
 `www/screenshot.png` is used for this README and for link previews (`og:image`). `www/screenshot-dark.png` is the README screenshot for GitHub's dark theme.
+
+## Health check
+
+[`/projects/text-to-speech/healthcheck/`](https://andrewmacheret.com/projects/text-to-speech/healthcheck/) checks the page and its scripts and styles. The Canary workflow (`.github/workflows/canary.yml`) opens it once a day, started by [andrewmacheret/canary](https://github.com/andrewmacheret/canary).
 
 ## Deploy
 
